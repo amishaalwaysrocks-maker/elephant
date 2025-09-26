@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HEC Mitigation Dashboard | Chhattisgarh</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+
+    <style>
+        /* Ensures the image fills the entire area of its parent wrapper */
+        .map-image-full {
+            /* Crucial property: Makes the image cover the entire content box 
+                while preserving its aspect ratio. It will be cropped if needed. */
+            object-fit: cover; 
+            
+            /* Ensures the image occupies 100% of the width and height */
+            width: 90%;
+            height: 90%;
+            
+            /* Display block is often cleaner for full-width elements */
+            display: block; 
+            
+            /* Sets a minimum height for the map container so the image has space to fill */
+            min-height: 400px; /* Adjust this value as needed for layout */
+            border-radius: 4px; /* Matches other card styles */
+        }
+
+        /* Ensures the container itself is positioned for the overlay and has dimensions */
+        .map-aspect-ratio-wrapper {
+            position: relative;
+            /* Flexing the card content can help the wrapper take up remaining space */
+            flex-grow: 1; 
+            overflow: hidden; /* Clips the parts of the image that use object-fit: cover */
+        }
+        
+        /* Modifying the parent card to support flexible layout */
+        .map-visualization-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Important to make it fill the grid area */
+        }
+        
+        /* The overall map area can also be sized for better visual impact */
+        .map-area {
+            /* Adjust based on your grid system, often flex or grid properties handle this */
+            height: auto;
+        }
+
+    </style>
+    </head>
+<body>
+
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-paw" style="color: #4CAF50;"></i>
+                <span>Project ELP</span>
+            </div>
+            <nav>
+                <a href="#map" class="nav-item active" data-page="map">
+                    <i class="fas fa-satellite-dish" style="color: #4CAF50;"></i> Real-Time Map
+                </a>
+                <a href="#analytics" class="nav-item" data-page="analytics">
+                    <i class="fas fa-chart-line" style="color: #9c27b0;"></i> Predictive Analytics
+                </a>
+                <a href="#alerts" class="nav-item" data-page="alerts">
+                    <i class="fas fa-bell" style="color: #FF9800;"></i> Alert Log
+                    <span class="alert-count">3</span>
+                </a>
+                <a href="#settings" class="nav-item" data-page="settings">
+                    <i class="fas fa-cog" style="color: #795548;"></i> Settings
+                </a>
+            </nav>
+            <div class="status-panel">
+                <p>System Uptime: **99.8%**</p>
+                <p>Last Sync: 8:25 PM IST</p>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <h1>Chhattisgarh HEC Monitoring Dashboard</h1>
+                <div class="user-info">
+                    <span>Forest Dept. Admin | Sector A</span>
+                    <i class="fas fa-user-circle" style="color: #2196F3;"></i>
+                </div>
+            </header>
+
+            <section id="map" class="page-content active-page">
+                <div class="map-grid">
+                    <div class="map-area">
+                        <div class="data-card map-visualization-card"> 
+                            <h2>Live Elephant Activity & Sensor Status</h2>
+                            
+                            <div class="map-aspect-ratio-wrapper">
+                                <center>
+                                <img src="maps2.jpeg" alt="Chhattisgarh Elephant Habitat Map" class="map-image-full">
+                                </center>
+                                <div class="map-overlay-text">
+                                    <p class="map-overlay-text-p map-overlay-text-p-margin-0"></p>
+                                    <p class="blink-dot critical-alert-text">🔴 CRITICAL ALERT: ELEPHANT DETECTED NEAR VILLAGE BHILAI</p>
+                                    <p class="hotspot-active-text"><i class="fas fa-map-marker-alt"></i> Hotspot Layer Active (Frequent Crossing Zones)</p>
+                                </div>
+
+                                <div class="map-legend">
+                                    <span class="legend-item" style="color: #4CAF50;"><i class="fas fa-circle operational"></i> Operational (14/15)</span>
+                                    <span class="legend-item" style="color: #FFEB3B;"><i class="fas fa-circle low-battery"></i> Low Battery (1)</span>
+                                    <span class="legend-item" style="color: #F44336;"><i class="fas fa-triangle-exclamation"></i> ACTIVE ALERT</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="data-card mitigation-status-card">
+                            <h3><i class="fas fa-bullhorn"></i> Mitigation Status</h3>
+                            <img src="elephantdetected.jpeg" alt="Elephant Detection Confirmation" style="width: 100%; height: auto; margin: 10px 0; border-radius: 4px;"/>
+                            <p><strong>Deterrent Units Online:</strong> 15/15</p>
+                            <p><strong>Last Command:</strong> Activate Deterrent Unit Alpha (8:25 PM)</p>
+                            <p><strong>Response Time:</strong> <strong class="data-highlight">2.1 seconds</strong> (Successful Activation)</p>
+                            <p class="action-btn success-action-btn">System Check Complete <i class="fas fa-check-circle"></i></p>
+                        </div>
+                        </div>
+                    
+                    <div class="realtime-data-panel">
+                        
+                        <div class="data-card overall-status-summary">
+                            <h3><i class="fas fa-chart-pie"></i> Regional HEC Summary (24h)</h3>
+                            <p><strong>Total Incidents:</strong> 5 (All resolved)</p>
+                            <p><strong>Total Elephants Monitored:</strong> 12 (via Collars & Detection)</p>
+                            <p><strong>False Alarms Rate (24h):</strong> 10% (Low)</p>
+                            <p class="action-btn secondary-action-btn">View Regional Status <i class="fas fa-arrow-right"></i></p>
+                        </div>
+                        
+                        <div class="data-card alert-summary">
+                            <h3><i class="fas fa-triangle-exclamation"></i> CRITICAL ALERT (Level 4/4)</h3> 
+                            <p><strong>Location:</strong> Village Bhilai | Sensor ID: S-42</p>
+                            <p><strong>Movement:</strong> ENE at 6.8 km/h</p>
+                            <p class="distance-warning-text"><strong>Distance to Danger Zone:</strong> <strong class="data-highlight">350m</strong></p>
+                            <p class="imminent-breach-text"><strong>Danger Radius ($1 \text{ km}$):</strong> <strong class="data-highlight">BREACH IMMINENT!</strong></p>
+                            <p><strong>Confirmation:</strong> Thermal + Vibration (98% Conf.)</p>
+                            <p class="action-btn critical-action-btn">Activate Deterrents <i class="fas fa-bolt"></i></p>
+                            <p class="footnote-text">*SMS alert sent to 12 officials.</p>
+                        </div>
+                        
+                        <div class="data-card">
+                            <h3><i class="fas fa-headset"></i> Emergency Contacts</h3>
+                            <p><strong>Forest Official (On-site):</strong> +91 98765 12345 (Direct)</p>
+                            <p><strong>Local Police (Quick Response):</strong> 100 or +91 99999 54321</p>
+                            <p><strong>Medical Emergency:</strong> 108 (Ambulance)</p>
+                            <p class="action-btn success-action-btn">Call Forest Team <i class="fas fa-phone"></i></p>
+                        </div>
+
+                        <div class="data-card">
+                            <h3><i class="fas fa-share-alt"></i> Crowdsourced Intel</h3>
+                            <p><strong>Last Local Report:</strong> 45 mins ago (Farm Sector D)</p>
+                            <p><strong>Report Status:</strong> Awaiting verification by Sector B</p>
+                            <p class="action-btn primary-action-btn">Submit New Sighting <i class="fas fa-camera"></i></p>
+                            <p class="footnote-text">GPS location and photo required for submission.</p>
+                        </div>
+                        
+                        <div class="data-card sensor-status">
+                            <h3>System Health & Network</h3>
+                            <p><strong>Network Health:</strong> <span class="online-status">Online (4G)</span></p>
+                            <p class="sync-queue-warning"><strong>Offline Sync Queue:</strong> 0 Events (Ready to store when network is down)</p>
+                            <p><strong>Avg. Temp:</strong> $28^\circ\text{C}$ | <strong>Wind:</strong> 4 km/h</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </section>
+
+            <section id="analytics" class="page-content">
+                <h2>Predictive Analytics & Model Performance</h2>
+                <div class="analytics-grid">
+                    
+                    <div class="data-card prediction-model">
+                        <h3>🐘 7-Day Movement Forecast</h3>
+                        <p><strong>High-Risk Corridors:</strong> Corridor A & C (78% Probability)</p>
+                        <p><strong>LSTM Accuracy:</strong> 73% (Wild Habitat)</p>
+                        <div class="chart-container">
+                            <canvas id="movementForecastChart"></canvas>
+                        </div>
+                        <p class="detail-text"><em>Forecast suggests potential intrusion into Sector B by T+48h.</em></p>
+                    </div>
+                    
+                    <div class="data-card historical-trends">
+                        <h3><i class="fas fa-chart-area"></i> Annual Incident Trends</h3>
+                        <p><strong>YTD Incidents:</strong> 245 (vs 280 last year)</p>
+                        <p><strong>Peak Months:</strong> June, October (Harvest Season)</p>
+                        <div class="chart-container-large">
+                             <canvas id="annualIncidentChart"></canvas>
+                        </div>
+                        <p class="detail-text"><em>12% reduction in major incidents YoY due to early warning.</em></p>
+                    </div>
+                    
+                    <div class="data-card performance-metrics">
+                        <h3>System Performance</h3>
+                        <div class="metric-group">
+                            <div class="metric-item">
+                                <p class="metric-value">92.0%</p>
+                                <p class="metric-label">Field Accuracy</p>
+                            </div>
+                            <div class="metric-item">
+                                <p class="metric-value">1.8s</p>
+                                <p class="metric-label">Response Time</p>
+                            </div>
+                            <div class="metric-item">
+                                <p class="metric-value">8%</p>
+                                <p class="metric-label">False Alarm Rate</p>
+                            </div>
+                        </div>
+                        <p class="detail-text"><em>YOLOv8 & SVM-RBF model inference time and accuracy.</em></p>
+                    </div>
+                    
+                    <div class="data-card report-generator">
+                        <h3>Report Generator</h3>
+                        <label for="report-type">Report Type:</label>
+                        <select id="report-type">
+                            <option>Incident Log (Last Month)</option>
+                            <option>Cost-Benefit Analysis</option>
+                            <option>Seasonal Migration Report</option>
+                        </select>
+                        <p class="action-btn download-btn"><i class="fas fa-download"></i> Generate & Download</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="alerts" class="page-content">
+                <h2>Recent Alert and Response Log</h2>
+                <table class="alert-table">
+                    <thead>
+                        <tr>
+                            <th>Time (IST)</th>
+                            <th>Status</th>
+                            <th>Location</th>
+                            <th>Sensor Type</th>
+                            <th>Deterrents</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>8:25 PM</td>
+                            <td class="critical">CRITICAL</td>
+                            <td>Bhilai Village, S-42</td>
+                            <td>Vibration + Thermal</td>
+                            <td>Activated (Light, Sound)</td>
+                            <td>**View Trajectory**</td>
+                        </tr>
+                        <tr>
+                            <td>7:15 PM</td>
+                            <td class="medium">MEDIUM</td>
+                            <td>Corridor A Entry, S-11</td>
+                            <td>PIR Motion</td>
+                            <td>N/A (Prediction)</td>
+                            <td>**Closed**</td>
+                        </tr>
+                        <tr>
+                            <td>5:30 PM</td>
+                            <td class="false-alarm">FALSE ALARM</td>
+                            <td>Farm Sector C, S-35</td>
+                            <td>Vibration</td>
+                            <td>Deactivated (Rain Filter)</td>
+                            <td>**Closed**</td>
+                        </tr>
+                        <tr>
+                            <td>4:45 PM</td>
+                            <td class="minor">MINOR</td>
+                            <td>Water Source B, S-05</td>
+                            <td>Acoustic</td>
+                            <td>N/A (Drinking)</td>
+                            <td>**Resolved**</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <span>&lt; Previous</span>
+                    <span>1 of 12</span>
+                    <span>Next &gt;</span>
+                </div>
+            </section>
+            
+            <section id="settings" class="page-content">
+                <h2>System Configuration & User Management</h2>
+                <div class="settings-grid">
+                    
+                    <div class="data-card">
+                        <h3><i class="fas fa-sliders-h"></i> Sensor Thresholds</h3>
+                        <p>Configure sensitivity levels for HEC detection across all zones.</p>
+                        
+                        <div class="input-group-container">
+                            <label for="vibration-sensitivity" class="input-label">Vibration Sensitivity (0-10):</label>
+                            <input type="range" id="vibration-sensitivity" min="0" max="10" value="7" class="custom-range-slider">
+                            <span class="input-detail-text">Current: 7/10 (Medium-High)</span>
+                        </div>
+                        
+                        <div class="input-group-container">
+                            <label for="thermal-temp" class="input-label">Thermal Trigger Temperature:</label>
+                            <input type="number" id="thermal-temp" value="30" min="20" max="50" class="custom-text-input">
+                            <span class="input-detail-text">Alert if above this threshold.</span>
+                        </div>
+
+                        <p class="action-btn save-action-btn"><i class="fas fa-save"></i> Save Thresholds</p>
+                    </div>
+                    
+                    <div class="data-card deterrent-control">
+                        <h3><i class="fas fa-toolbox"></i> Deterrent Management</h3>
+                        <p>Monitor and manually test deterrence units in the field.</p>
+                        
+                        <div class="input-group-container input-margin-top">
+                            <label for="deterrent-unit-select" class="input-label">Select Unit:</label>
+                            <select id="deterrent-unit-select" class="custom-text-input">
+                                <option>Unit Alpha (Bhilai)</option>
+                                <option>Unit Beta (Corridor A)</option>
+                                <option>Unit Gamma (Sector C)</option>
+                            </select>
+                        </div>
+                        
+                        <p class="action-btn warning-action-btn full-width-btn margin-top-10"><i class="fas fa-satellite-dish"></i> Run Remote Diagnostics</p>
+                        <p class="action-btn critical-action-btn full-width-btn margin-top-10">Manual Deterrent Test (3s)</p>
+                    </div>
+                    
+                    <div class="data-card">
+                        <h3><i class="fas fa-users-cog"></i> User & Access Control</h3>
+                        <p>Manage administrator accounts and permissions.</p>
+
+                        <div class="user-info-panel">
+                            <p class="current-role">Current User Role: <strong class="online-status">Sector Administrator</strong></p>
+                            <p class="user-email"><i class="fas fa-envelope"></i> admin.sectorA@forest.gov</p>
+                            
+                            <p class="action-btn warning-action-btn full-width-btn">Change Password</p>
+                            <p class="action-btn critical-action-btn full-width-btn">Logout All Devices</p>
+                        </div>
+                    </div>
+
+                    <div class="data-card">
+                        <h3><i class="fas fa-plug"></i> Integration & API</h3>
+                        <p>Configure external service hooks (e.g., SMS alerts and HQ push).</p>
+                        
+                        <p class="integration-status-text"><strong>SMS Gateway Status:</strong> <span class="online-status">Operational</span></p>
+                        <p><strong>Last API Key Used:</strong> ********************</p>
+                        
+                        <div class="input-group-container input-margin-top">
+                            <label for="notification-email" class="input-label">Primary Alert Email:</label>
+                            <input type="email" id="notification-email" value="hq.alerts@forest.gov" class="custom-text-input">
+                        </div>
+                        
+                        <p class="action-btn info-action-btn full-width-btn"><i class="fas fa-sync-alt"></i> Renew API Key</p>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
